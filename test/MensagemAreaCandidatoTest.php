@@ -10,7 +10,12 @@ class MensagemAreaCandidatoTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldBeMensagemStatusCongelado()
     {
-        $mensagem = new MensagemAreaCandidato();
+        $mensagem = new MensagemAreaCandidato(
+            [
+                new MensagemCandidatoCongelado(),
+                new MensagemCandidatoInativo()
+            ]
+        );
         $usuario = new Usuario('João Antonio', Usuario::STATUS_CONGELADO);
 
         $this->assertEquals(
@@ -24,7 +29,12 @@ class MensagemAreaCandidatoTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldBeMensagemStatusInativo()
     {
-        $mensagem = new MensagemAreaCandidato();
+        $mensagem = new MensagemAreaCandidato(
+            [
+                new MensagemCandidatoCongelado(),
+                new MensagemCandidatoInativo()
+            ]
+        );
         $usuario = new Usuario('Pietra', Usuario::STATUS_INATIVO);
 
         $this->assertEquals(

@@ -1,10 +1,15 @@
 <?php
 
-class Usuario
+interface UsuarioInterface
 {
     const STATUS_CONGELADO = 'congelado';
     const STATUS_INATIVO = 'inativo';
+    public function getNome();
+    public function getStatus();
+}
 
+class Usuario implements UsuarioInterface
+{
     private $nome;
     private $status;
 
