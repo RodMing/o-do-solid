@@ -1,10 +1,7 @@
-Vamos encontrar o erro.
+Vamos refatorar a class.
 ======================
 
-Fazendo o code review da classe **EmpresaService** eu percebi que pode haver mais responsabilidades do que a mesma deveria ter.
-
-
-_Dica: Imagine que amanhã você irá mudar o calculo de porte e ainda precisaria implementar uma nova validação de um atributo novo que as empresas precisam ter.
+Precisamos implementar uma nova mensagem para usuarios com status suspenso, porém nosso código não esta extensivel conforme o OCP.
 
 30 minutos
 ----------
