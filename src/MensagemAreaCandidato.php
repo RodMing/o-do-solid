@@ -5,22 +5,35 @@ interface MensagemAreaCandidatoInterface
 	public function get(UsuarioInterface $usuario);
 }
 
+class MensagemCollection
+{
+    private $mensagens = [];
+
+    public function atach(MensagemAreaCandidatoInterface $mensagem)
+    {
+        $this->mensagens[] = $mensagem;
+        return $this;
+    }
+
+    public function getMensagens()
+    {
+        return $this->mensagens;
+    }
+}
+
 class MensagemAreaCandidato implements MensagemAreaCandidatoInterface
 {
-	private $mensagens = [];
+	private $mensagens;
 
-	public function __construct(array $mensagens)
+	public function __construct(MensagemCollection $mensagens)
 	{
 		$this->mensagens = $mensagens;
 	}
 
     public function get(UsuarioInterface $usuario)
     {
-    	foreach ($this->mensagens as $key => $value) {
-    		if ($value instanceof MensagemAreaCandidatoInterface && $value->get($usuario)) {
-    			return $value->get($usuario);
-    		}
-    	}
+    	foreach ($this->mensagens->getMensagens() as $mensagem) 
+    	    if ($mensagem->get($usuario)) return $mensagem->get($usuario);
 
     	return false;
     }

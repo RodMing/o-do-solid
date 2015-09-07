@@ -10,17 +10,16 @@ class MensagemAreaCandidatoTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldBeMensagemStatusCongelado()
     {
-        $mensagem = new MensagemAreaCandidato(
-            [
-                new MensagemCandidatoCongelado(),
-                new MensagemCandidatoInativo()
-            ]
-        );
+        $mensagemCollection = new MensagemCollection();
+        $mensagemCollection
+            ->atach(new MensagemCandidatoInativo)
+            ->atach(new MensagemCandidatoCongelado);
+
         $usuario = new Usuario('João Antonio', Usuario::STATUS_CONGELADO);
 
         $this->assertEquals(
             'Status congelado!',
-            $mensagem->get($usuario)
+            (new MensagemAreaCandidato($mensagemCollection))->get($usuario)
         );
     }
 
@@ -29,17 +28,16 @@ class MensagemAreaCandidatoTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldBeMensagemStatusInativo()
     {
-        $mensagem = new MensagemAreaCandidato(
-            [
-                new MensagemCandidatoCongelado(),
-                new MensagemCandidatoInativo()
-            ]
-        );
+        $mensagemCollection = new MensagemCollection();
+        $mensagemCollection
+            ->atach(new MensagemCandidatoInativo)
+            ->atach(new MensagemCandidatoCongelado);
+
         $usuario = new Usuario('Pietra', Usuario::STATUS_INATIVO);
 
         $this->assertEquals(
             'Status inativo!',
-            $mensagem->get($usuario)
+            (new MensagemAreaCandidato($mensagemCollection))->get($usuario)
         );
     }
 }
